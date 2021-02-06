@@ -1,3 +1,5 @@
+const backendBaseUrl = 'http://localhost:3600';
+
 let cats = [];
 
 let breeds = [];
@@ -21,7 +23,7 @@ const getBreedNumbers = (breeds, cats) => {
 }
 
 async function getCats() {
-    const request = await fetch('http://localhost:3500/cats');
+    const request = await fetch(`${backendBaseUrl}/cats`);
     return request.json();      
 }
 
@@ -44,7 +46,7 @@ const listenForNew = () => {
                 }
                 inputs[0].value = "";
                 inputs[1].value = "";
-                await fetch('http://localhost:3500/cats', { method:'post', body: JSON.stringify(cat), headers: { "Content-Type": 'application/json'}});
+                await fetch(`${backendBaseUrl}/cats`, { method:'post', body: JSON.stringify(cat), headers: { "Content-Type": 'application/json'}});
                 location.reload();
             }
         })
