@@ -1,19 +1,26 @@
 import React from 'react';
 import './App.css';
 import CatList from './components/List';
+import NewCat from './components/New';
 import { backendBaseUrl } from './Constants';
 
 class App extends React.Component {
-    state = { cats: [] }
+    state = { cats: [], colour: 'red' }
 
     async getCats() {
         const request = await fetch(`${backendBaseUrl}/cats`);
-        return request.json();      
+        return request.json(); 
     }
 
     async componentDidMount() {
         let cats = await this.getCats();
-        this.setState({cats});
+        this.setState({ cats: cats });
+    }
+
+    addCat(cat) {
+        let newCats = [...this.state.cats];
+        newCats.push(cat);
+        this.setState({ cats: newCats });
     }
 
     render() {
@@ -26,13 +33,7 @@ class App extends React.Component {
                         <canvas id="canvas"></canvas>
                     </section>
                     <CatList cats={this.state.cats} />
-                    <section>
-                        <h3>New Cat</h3>
-                        <ul>
-                            <li><input type="text" placeholder="Name"/></li>
-                            <li><input type="text" placeholder="Breed"/></li>
-                        </ul>
-                    </section>
+                    <NewCat addCat={cat => this.addCat(cat)} />
                 </main>
             </div>
         )
