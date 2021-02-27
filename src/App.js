@@ -1,9 +1,20 @@
 import React from 'react';
 import './App.css';
 import CatList from './components/List';
+import { backendBaseUrl } from './Constants';
 
 class App extends React.Component {
     state = { cats: [] }
+
+    async getCats() {
+        const request = await fetch(`${backendBaseUrl}/cats`);
+        return request.json();      
+    }
+
+    async componentDidMount() {
+        let cats = await this.getCats();
+        this.setState({cats});
+    }
 
     render() {
             return (
