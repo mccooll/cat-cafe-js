@@ -1,26 +1,24 @@
-import React from 'react';
+import { useState } from "react";
 
-class New extends React.Component {
-    state = { name: '', breed: ''}
+function New(props) {
+    const [name, setName] = useState('');
+    const [breed, setBreed] = useState('');
 
-    saveCatToList(e) {
+    const saveCatToList = function(e) {
         if(e.key==="Enter") {
-            const {name,breed} = this.state;
-            this.props.addCat({ name: name, breed: breed});
+            props.addCat({ name: name, breed: breed});
         }
     }
 
-    render() {
-        return (
+    return (
             <section>
                 <h3>New Cat</h3>
                 <ul>
-                    <li><input type="text" placeholder="Name" onChange={v => this.setState({name: v.target.value})} value={this.state.name} /></li>
-                    <li><input type="text" placeholder="Breed" onKeyDown={e => this.saveCatToList(e)} onChange={v => this.setState({breed: v.target.value})} value={this.state.breed} /></li>
+                    <li><input type="text" placeholder="Name" onChange={v => setName(v.target.value)} value={name} /></li>
+                    <li><input type="text" placeholder="Breed" onKeyDown={e => saveCatToList(e)} onChange={v => setBreed(v.target.value)} value={breed} /></li>
                 </ul>
             </section>
-        )
-    }
+    )
 }
 
 export default New;

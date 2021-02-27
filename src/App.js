@@ -33,7 +33,7 @@ class App extends React.Component {
                         <canvas id="canvas"></canvas>
                     </section>
                     <CatList cats={this.state.cats} />
-                    <NewCat addCat={cat => this.addCat(cat)} />
+                    <NewCat addCat={this.addCat.bind(this)} />
                 </main>
             </div>
         )
