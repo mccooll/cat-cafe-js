@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import CatList from './components/List';
 import NewCat from './components/New';
+import Graph from './components/Graph';
 import { backendBaseUrl } from './Constants';
 
 class App extends React.Component {
@@ -29,10 +30,7 @@ class App extends React.Component {
             <div className="App">
                 <header><h1>Cat Cafe</h1></header>
                 <main>
-                    <section class="chart">
-                        <h3>Breeds</h3>
-                        <canvas id="canvas"></canvas>
-                    </section>
+                    <Graph cats={this.state.cats} />
                     <CatList cats={this.state.cats} />
                     <NewCat addCat={this.addCat.bind(this)} />
                 </main>
