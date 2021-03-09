@@ -19,6 +19,7 @@ class App extends React.Component {
 
     addCat(cat) {
         let newCats = [...this.state.cats];
+        fetch(`${backendBaseUrl}/cats`, { method:'post', body: JSON.stringify(cat), headers: { "Content-Type": 'application/json'}});
         newCats.push(cat);
         this.setState({ cats: newCats });
     }
